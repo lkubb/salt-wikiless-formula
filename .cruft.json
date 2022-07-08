@@ -1,0 +1,63 @@
+{
+  "template": "https://github.com/lkubb/salt-template-formula-compose",
+  "commit": "3bf116fca254f07ebcba5a30fcc5f071472ef84a",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "_extensions": [
+        "local_extensions.YAMLDumper"
+      ],
+      "_jinja2_env_vars": {
+        "block_start_string": "{!",
+        "block_end_string": "!}",
+        "variable_start_string": "{=",
+        "variable_end_string": "=}",
+        "comment_start_string": "{@",
+        "comment_end_string": "@}"
+      },
+      "name": "Wikiless",
+      "abbr": "wikiless",
+      "abbr_pysafe": "wikiless",
+      "project_name": "wikiless",
+      "containers": "wikiless,redis",
+      "git_username": "lkubb",
+      "_lookup": {
+        "containers": {
+          "app": {
+            "image": "docker.io/library/node:16-alpine"
+          },
+          "redis": {
+            "image": "docker.io/library/redis:alpine"
+          }
+        },
+        "paths": {
+          "build": "Dockerfile"
+        },
+        "repo": "https://codeberg.org/orenom/Wikiless"
+      },
+      "_settings": {
+        "config": {
+          "cache_control": true,
+          "cache_control_interval": 24,
+          "cert_dir": null,
+          "default_lang": "en",
+          "domain": "localhost",
+          "http_addr": "0.0.0.0",
+          "https_enabled": false,
+          "nonssl_port": 7355,
+          "redirect_http_to_https": false,
+          "redis_password": null,
+          "redis_url": "redis://redis:6379",
+          "ssl_port": null,
+          "theme": null,
+          "trust_proxy": false,
+          "trust_proxy_address": "127.0.0.1",
+          "wikimedia_useragent": "Wikiless media proxy bot (https://codeberg.org/orenom/Wikiless)",
+          "wikipage_cache_expiration": 3600
+        }
+      },
+      "_template": "https://github.com/lkubb/salt-template-formula-compose"
+    }
+  },
+  "directory": null
+}

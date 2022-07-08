@@ -1,0 +1,63 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+#
+# Set default values.
+---
+values:
+  lookup:
+    rootgroup: root
+    compose:
+      create_pod: null
+      pod_args: null
+      project_name: wikiless
+      remove_orphans: true
+      service:
+        container_prefix: null
+        ephemeral: true
+        pod_prefix: null
+        restart_policy: on-failure
+        separator: null
+        stop_timeout: null
+    paths:
+      base: /opt/containers/wikiless
+      compose: docker-compose.yml
+      config_wikiless: wikiless.env
+      config_redis: redis.env
+      build: Dockerfile
+    user:
+      groups: []
+      home: null
+      name: wikiless
+      shell: /usr/sbin/nologin
+      uid: null
+    containers:
+      app:
+        image: docker.io/library/node:16-alpine
+      redis:
+        image: docker.io/library/redis:alpine
+    repo: https://codeberg.org/orenom/Wikiless
+  install:
+    rootless: true
+    remove_all_data_for_sure: false
+  config:
+    cache_control: true
+    cache_control_interval: 24
+    cert_dir: null
+    default_lang: en
+    domain: localhost
+    http_addr: 0.0.0.0
+    https_enabled: false
+    nonssl_port: 7355
+    redirect_http_to_https: false
+    redis_password: null
+    redis_url: redis://redis:6379
+    ssl_port: null
+    theme: null
+    trust_proxy: false
+    trust_proxy_address: 127.0.0.1
+    wikimedia_useragent: Wikiless media proxy bot (https://codeberg.org/orenom/Wikiless)
+    wikipage_cache_expiration: 3600
+  # Just here for testing
+  added_in_defaults: defaults_value
+  winner: defaults
+...

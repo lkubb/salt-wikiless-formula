@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  app:
+    build: {{ salt["file.dirname"](wikiless.lookup.paths.build) }}
+    ports:
+      - {{ wikiless.config.nonssl_port }}:{{ wikiless.config.nonssl_port }}
+    env_file:
+      - {{ wikiless.lookup.paths.config_wikiless }}
+  redis:
+    image: {{ wikiless.lookup.containers.redis.image }}
+    env_file:
+      - {{ wikiless.lookup.paths.config_redis }}
