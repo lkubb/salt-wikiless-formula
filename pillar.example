@@ -10,7 +10,10 @@ wikiless:
       # Setting this to true might incur accidental data loss!
     remove_all_data_for_sure: false
   config:
+      # Wikiless can automatically remove the cached media files from
+      # the server. Cache control is on by default.
     cache_control: true
+      # This sets the interval for often the cache directory is emptied (in hours).
     cache_control_interval: 24
     cert_dir: null
     default_lang: en
@@ -25,7 +28,13 @@ wikiless:
     theme: null
     trust_proxy: false
     trust_proxy_address: 127.0.0.1
+      # Wikimedia requires a HTTP User-agent header for all Wikimedia related
+      # requests. It's a good idea to change this to something unique.
+      # Read more: https://meta.wikimedia.org/wiki/User-Agent_policy
     wikimedia_useragent: Wikiless media proxy bot (https://codeberg.org/orenom/Wikiless)
+      # Redis cache expiration values (in seconds).
+      # When the cache expires, new content is fetched from Wikipedia (when the
+      # given URL is revisited).
     wikipage_cache_expiration: 3600
 
   lookup:
