@@ -22,6 +22,8 @@ Wikiless user session is initialized at boot:
   compose.lingering_managed:
     - name: {{ wikiless.lookup.user.name }}
     - enable: {{ wikiless.install.rootless }}
+    - require:
+      - user: {{ wikiless.lookup.user.name }}
 
 Wikiless paths are present:
   file.directory:

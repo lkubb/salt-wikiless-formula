@@ -17,6 +17,7 @@ wikiless:
         ephemeral: true
         pod_prefix: null
         restart_policy: on-failure
+        restart_sec: 2
         separator: null
         stop_timeout: null
     paths:
@@ -31,6 +32,7 @@ wikiless:
       name: wikiless
       shell: /usr/sbin/nologin
       uid: null
+      gid: null
     containers:
       app:
         image: docker.io/library/node:16-alpine
