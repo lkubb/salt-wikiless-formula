@@ -8,6 +8,18 @@
 include:
   - {{ sls_config_clean }}
 
+{%- if wikiless.install.autoupdate_service %}
+
+Podman autoupdate service is disabled for Wikiless:
+{%-   if wikiless.install.rootless %}
+  compose.systemd_service_disabled:
+    - user: {{ wikiless.lookup.user.name }}
+{%-   else %}
+  service.disabled:
+{%-   endif %}
+    - name: podman-auto-update.timer
+{%- endif %}
+
 Wikiless is absent:
   compose.removed:
     - name: {{ wikiless.lookup.paths.compose }}

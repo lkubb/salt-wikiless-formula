@@ -44,6 +44,8 @@ wikiless:
     repo: https://codeberg.org/orenom/Wikiless
   install:
     rootless: true
+    autoupdate: true
+    autoupdate_service: false
     remove_all_data_for_sure: false
   config:
     cache_control: true

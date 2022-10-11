@@ -80,3 +80,15 @@ Wikiless is installed:
     - require:
       - user: {{ wikiless.lookup.user.name }}
 {%- endif %}
+
+{%- if wikiless.install.autoupdate_service is not none %}
+
+Podman autoupdate service is managed for Wikiless:
+{%-   if wikiless.install.rootless %}
+  compose.systemd_service_{{ "enabled" if wikiless.install.autoupdate_service else "disabled" }}:
+    - user: {{ wikiless.lookup.user.name }}
+{%-   else %}
+  service.{{ "enabled" if wikiless.install.autoupdate_service else "disabled" }}:
+{%-   endif %}
+    - name: podman-auto-update.timer
+{%- endif %}
