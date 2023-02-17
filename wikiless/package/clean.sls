@@ -1,8 +1,14 @@
-# -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- set tplroot = tpldir.split('/')[0] %}
-{%- set sls_config_clean = tplroot ~ '.config.clean' %}
+{#-
+    Removes the wikiless, redis containers
+    and the corresponding user account and service units.
+    Has a depency on `wikiless.config.clean`_.
+    If ``remove_all_data_for_sure`` was set, also removes all data.
+#}
+
+{%- set tplroot = tpldir.split("/")[0] %}
+{%- set sls_config_clean = tplroot ~ ".config.clean" %}
 {%- from tplroot ~ "/map.jinja" import mapdata as wikiless with context %}
 
 include:
@@ -42,6 +48,25 @@ Wikiless build/compose files are absent:
       - {{ wikiless.lookup.paths.build }}
     - require:
       - Wikiless is absent
+
+{%- if wikiless.install.podman_api %}
+
+Wikiless podman API is unavailable:
+  compose.systemd_service_dead:
+    - name: podman
+    - user: {{ wikiless.lookup.user.name }}
+    - onlyif:
+      - fun: user.info
+        name: {{ wikiless.lookup.user.name }}
+
+Wikiless podman API is disabled:
+  compose.systemd_service_disabled:
+    - name: podman
+    - user: {{ wikiless.lookup.user.name }}
+    - onlyif:
+      - fun: user.info
+        name: {{ wikiless.lookup.user.name }}
+{%- endif %}
 
 Wikiless user session is not initialized at boot:
   compose.lingering_managed:

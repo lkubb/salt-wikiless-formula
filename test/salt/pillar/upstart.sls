@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # vim: ft=yaml
 ---
 wikiless:
@@ -47,6 +46,7 @@ wikiless:
     autoupdate: true
     autoupdate_service: false
     remove_all_data_for_sure: false
+    podman_api: true
   config:
     cache_control: true
     cache_control_interval: 24

@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 # vim: ft=sls
 
-{%- set tplroot = tpldir.split('/')[0] %}
+{%- set tplroot = tpldir.split("/")[0] %}
 {%- from tplroot ~ "/map.jinja" import mapdata as wikiless with context %}
 {%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
 
@@ -35,18 +34,35 @@ Wikiless paths are present:
     - require:
       - user: {{ wikiless.lookup.user.name }}
 
+{%- if wikiless.install.podman_api %}
+
+Wikiless podman API is enabled:
+  compose.systemd_service_enabled:
+    - name: podman
+    - user: {{ wikiless.lookup.user.name }}
+    - require:
+      - Wikiless user session is initialized at boot
+
+Wikiless podman API is available:
+  compose.systemd_service_running:
+    - name: podman
+    - user: {{ wikiless.lookup.user.name }}
+    - require:
+      - Wikiless user session is initialized at boot
+{%- endif %}
+
 Wikiless build/compose files are managed:
   file.managed:
     - names:
       - {{ wikiless.lookup.paths.build }}:
-        - source: {{ files_switch(['Dockerfile', 'Dockerfile.j2'],
-                                  lookup='Wikiless build file is present',
+        - source: {{ files_switch(["Dockerfile", "Dockerfile.j2"],
+                                  lookup="Wikiless build file is present",
                                   indent_width=10,
                      )
                   }}
       - {{ wikiless.lookup.paths.compose }}:
-        - source: {{ files_switch(['docker-compose.yml', 'docker-compose.yml.j2'],
-                                  lookup='Wikiless compose file is present',
+        - source: {{ files_switch(["docker-compose.yml", "docker-compose.yml.j2"],
+                                  lookup="Wikiless compose file is present",
                                   indent_width=10,
                      )
                   }}
