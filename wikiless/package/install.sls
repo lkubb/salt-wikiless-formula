@@ -38,14 +38,14 @@ Wikiless paths are present:
 
 Wikiless podman API is enabled:
   compose.systemd_service_enabled:
-    - name: podman
+    - name: podman.socket
     - user: {{ wikiless.lookup.user.name }}
     - require:
       - Wikiless user session is initialized at boot
 
 Wikiless podman API is available:
   compose.systemd_service_running:
-    - name: podman
+    - name: podman.socket
     - user: {{ wikiless.lookup.user.name }}
     - require:
       - Wikiless user session is initialized at boot

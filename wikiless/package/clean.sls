@@ -53,7 +53,7 @@ Wikiless build/compose files are absent:
 
 Wikiless podman API is unavailable:
   compose.systemd_service_dead:
-    - name: podman
+    - name: podman.socket
     - user: {{ wikiless.lookup.user.name }}
     - onlyif:
       - fun: user.info
@@ -61,7 +61,7 @@ Wikiless podman API is unavailable:
 
 Wikiless podman API is disabled:
   compose.systemd_service_disabled:
-    - name: podman
+    - name: podman.socket
     - user: {{ wikiless.lookup.user.name }}
     - onlyif:
       - fun: user.info
