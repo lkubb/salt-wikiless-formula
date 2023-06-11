@@ -2,7 +2,7 @@
 
 {%- set tplroot = tpldir.split("/")[0] %}
 {%- from tplroot ~ "/map.jinja" import mapdata as wikiless with context %}
-{%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
+{%- from tplroot ~ "/libtofsstack.jinja" import files_switch with context %}
 
 Wikiless user account is present:
   user.present:
@@ -55,21 +55,25 @@ Wikiless build/compose files are managed:
   file.managed:
     - names:
       - {{ wikiless.lookup.paths.build }}:
-        - source: {{ files_switch(["Dockerfile", "Dockerfile.j2"],
-                                  lookup="Wikiless build file is present",
-                                  indent_width=10,
+        - source: {{ files_switch(
+                        ["Dockerfile", "Dockerfile.j2"],
+                        config=wikiless,
+                        lookup="Wikiless build file is present",
+                        indent_width=10,
                      )
                   }}
       - {{ wikiless.lookup.paths.compose }}:
-        - source: {{ files_switch(["docker-compose.yml", "docker-compose.yml.j2"],
-                                  lookup="Wikiless compose file is present",
-                                  indent_width=10,
+        - source: {{ files_switch(
+                        ["docker-compose.yml", "docker-compose.yml.j2"],
+                        config=wikiless,
+                        lookup="Wikiless compose file is present",
+                        indent_width=10,
                      )
                   }}
     - mode: '0644'
     - user: root
     - group: {{ wikiless.lookup.rootgroup }}
-    - makedirs: True
+    - makedirs: true
     - template: jinja
     - makedirs: true
     - context:
