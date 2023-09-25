@@ -34,7 +34,7 @@ Wikiless environment files are managed:
     - template: jinja
     - require:
       - user: {{ wikiless.lookup.user.name }}
-    - watch_in:
+    - require_in:
       - Wikiless is installed
     - context:
         wikiless: {{ wikiless | json }}

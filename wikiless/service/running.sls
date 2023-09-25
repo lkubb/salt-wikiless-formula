@@ -34,3 +34,4 @@ Wikiless service is running:
 {%- endif %}
     - watch:
       - Wikiless is installed
+      - sls: {{ sls_config_file }}
